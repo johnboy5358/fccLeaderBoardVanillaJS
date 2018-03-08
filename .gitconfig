@@ -1,0 +1,37 @@
+# https://gist.github.com/pksunkara/988716
+
+[alias]
+	a = add --all
+
+	#############
+
+	b = branch
+	ba = branch -a
+	bd = branch -d
+	bdd = branch -D
+	br = branch -r
+
+	#############
+	c = commit
+	cm = commit -m
+
+	co = checkout
+
+	cob = checkout -b
+
+	cl = clone
+
+	#############
+	d = diff
+
+	#############
+
+	f = fetch
+	fo = fetch origin
+	fu = fetch upstream
+
+	#############
+	ps = push
+
+	#############
+	st = status
