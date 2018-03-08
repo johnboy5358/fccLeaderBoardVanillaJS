@@ -12,16 +12,15 @@
 	br = branch -r
 
 	#############
-	c = commit
-	cm = commit -m
+	com = commit -m
 
 	co = checkout
-
 	cob = checkout -b
 
 	cl = clone
 
 	#############
+
 	d = diff
 
 	#############

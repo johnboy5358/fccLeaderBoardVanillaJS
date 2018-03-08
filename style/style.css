@@ -1,0 +1,87 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 98.5vw;
+  font-size: 20px;
+  background-color: darkgreen;
+}
+.container {
+  width: 75%;
+  margin: auto;
+  margin-top: 1rem; 
+  padding: 1rem 2px 1rem 2px;
+  background-color: darkgoldenrod;
+  border-radius: 5px 5px 0 0;
+}
+header h2 {
+  text-align: center;
+}
+header h2 span {
+  font-size: 1rem;
+}
+#leaderboard {
+  width: 100%;
+}
+.rank, .username {
+  padding-left: 1rem;
+}
+.username a {
+  text-decoration: none;
+  line-height: 3rem;
+}
+.recent, .alltime {
+  text-align: center;
+}
+thead {
+  background-color: #C2B543;
+}
+thead tr {
+  color: black;
+}
+thead tr.recent #recent,
+thead tr.alltime #alltime {
+  background-color: orangered;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+tr.recent button#recent::after,
+tr.alltime button#alltime::after {
+  content: "▾";
+  font-size: 1.2em;
+  display: inline-block;
+}
+tr{
+  width: 100%;
+  height: 3rem;
+}
+tbody tr:nth-child(odd){
+  background-color: palegoldenrod;
+}
+tbody tr:nth-child(even){
+  background-color: #C2B543;
+}
+th,td{
+  text-align: left;
+}
+.rank{
+  width: 7%;
+}
+.avatar{
+  padding: .25rem;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+th button{
+  width: 100%;
+  height: 3rem;
+  cursor: pointer;
+}
+.error td{
+  width:100%;
+  color: red;
+}
