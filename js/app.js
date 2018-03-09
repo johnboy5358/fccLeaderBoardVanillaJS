@@ -59,7 +59,7 @@
       join('')
     )
 
-    function aryPromiseToHtmlString (prom, listen) {
+    function aryPromiseToHtmlString (prom) {
       prom.then(ary => {
         document.getElementById('table-wrapper').innerHTML = transformAryToHtmlString(ary)
       })
@@ -72,18 +72,18 @@
     var allTimePromAry = baseUrlUsers('alltime')
 
     // display initial 'recent' data
-    aryPromiseToHtmlString(recentPromAry, '#recent')
+    aryPromiseToHtmlString(recentPromAry)
 
     // listen for 'recent' button click events.
     document.getElementById('recent').addEventListener('click', function(e){
       e.target.parentElement.parentElement.className = 'recent'
-      aryPromiseToHtmlString(recentPromAry, '#recent')
+      aryPromiseToHtmlString(recentPromAry)
     })
 
     // listen for 'alltime' button click events.
     document.getElementById('alltime').addEventListener('click', function(e){
       e.target.parentElement.parentElement.className = 'alltime'
-      aryPromiseToHtmlString(allTimePromAry, '#alltime')
+      aryPromiseToHtmlString(allTimePromAry)
     })
 
   }
