@@ -24,18 +24,11 @@
       for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
         fns[_key] = arguments[_key];
       }
-
       return function (x) {
         return fns.reduce(function (v, f) {
           return f(v);
         }, x);
       };
-    }
-
-    function getTopUsers(baseUrl){
-      return async function (type){
-        return await fetch(baseUrl+type).then(function(response){ return response.json()})
-     }
     }
 
     // fn :: template constructs each user table row.
@@ -52,39 +45,48 @@
         </tr>`)
     }
 
-    function makeBtnClickEvt(targ, listen, dataString) {
 
-      var listener = document.querySelector(listen)
-      
-      listener.addEventListener('click', function(e){
-        listener.parentElement.parentElement.className = listen.slice(1)
-        targ.innerHTML = dataString
-      })
+    // getTopUsers : String -> String -> Promise
+    function getTopUsers(baseUrl){
+      return function (type){
+        return fetch(baseUrl+type).then(function(response){ return response.json()})
+      }
 
     }
-  
-    (async function () {
+   
+    var transformAryToHtmlString = pipe(
+      map(tableRowTemplate),
+      join('')
+    )
 
-      var transformAryToHtmlString = pipe(
-        map(tableRowTemplate),
-        join('')
-      )
+    function aryPromiseToHtmlString (prom, listen) {
+      prom.then(ary => {
+        document.getElementById('table-wrapper').innerHTML = transformAryToHtmlString(ary)
+      })
+    }
 
-      // get data from api.
-      var recentData = await getTopUsers('https://fcctop100.herokuapp.com/api/fccusers/top/')('recent')
-      var allTimeData = await getTopUsers('https://fcctop100.herokuapp.com/api/fccusers/top/')('alltime')
+    var baseUrlUsers = getTopUsers('https://fcctop100.herokuapp.com/api/fccusers/top/')
 
-      // Initialise table.
-      tableWrapper.innerHTML = transformAryToHtmlString(recentData)
+    // get data from api.
+    var recentPromAry = baseUrlUsers('recent')
+    var allTimePromAry = baseUrlUsers('alltime')
 
-      // make click events.
-      makeBtnClickEvt(tableWrapper, '#recent', transformAryToHtmlString(recentData))
-      makeBtnClickEvt(tableWrapper, '#alltime', transformAryToHtmlString(allTimeData))   
-      
+    // display initial 'recent' data
+    aryPromiseToHtmlString(recentPromAry, '#recent')
 
-    }())
+    // listen for 'recent' button click events.
+    document.getElementById('recent').addEventListener('click', function(e){
+      e.target.parentElement.parentElement.className = 'recent'
+      aryPromiseToHtmlString(recentPromAry, '#recent')
+    })
+
+    // listen for 'alltime' button click events.
+    document.getElementById('alltime').addEventListener('click', function(e){
+      e.target.parentElement.parentElement.className = 'alltime'
+      aryPromiseToHtmlString(allTimePromAry, '#alltime')
+    })
+
   }
-
   catch(err) {
     tableWrapper.innerHTML = `<tr class="error"><td>Opps! Something went wrong: ${err.message}.</td></tr>`
     console.log(err.message)

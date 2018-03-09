@@ -52,6 +52,7 @@ tr.recent button#recent::after,
 tr.alltime button#alltime::after {
   content: "▾";
   font-size: 1.2em;
+  margin-left: .5rem;
   display: inline-block;
 }
 tr{
