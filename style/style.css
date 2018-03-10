@@ -82,7 +82,7 @@ th button{
   height: 3rem;
   cursor: pointer;
 }
-.error td{
-  width:100%;
+.err-msg{
+  width:100% !important;
   color: red;
 }
